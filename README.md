@@ -23,7 +23,8 @@ SUBSCRIPTION ... none
 ## Briefing
 
 Obscura is an open-source home camera system. The goal is a convenient setup that belongs entirely to you
-and replaces camera vendors' services (or similar ones) that keep your recordings, and some features, behind a paid cloud subscription.
+and replaces camera vendors' services (or similar ones) where cloud storage for recordings and some features
+are only available with a paid subscription.
 
 Everything runs on your own server. The cameras never reach the internet; only the hub talks to them. When
 something moves in a zone or a person walks in, the hub records a short clip, sends an alert to your phone,
