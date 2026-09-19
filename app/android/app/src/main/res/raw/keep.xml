@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Keep notification sounds and icon when resource shrinking is on (they are only referenced by name). -->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@raw/obscura_motion,@raw/obscura_person,@drawable/ic_stat_obscura" />

@@ -1,0 +1,16 @@
+__pycache__/
+node_modules/
+dist/
+build/
+coverage/
+.env
+.env.*
+
+# Obscura
+hub/.venv/
+hub/data/
+deploy/data/
+.pytest_cache/
+*.jks
+*.keystore
+app/android/key.properties

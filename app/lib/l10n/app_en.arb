@@ -1,0 +1,414 @@
+{
+  "@@locale": "en",
+  "tagline": "Observe · Detect · Prevent",
+  "connectTitle": "Connect to your hub",
+  "connectSubtitle": "Enter the hub address and the pairing code from its logs.",
+  "hubAddress": "Hub address",
+  "hubAddressInvalid": "Enter an address like 192.168.1.10:7878",
+  "pairingCode": "Pairing code",
+  "pairingCodeInvalid": "The code has 10 characters",
+  "deviceName": "Name of this phone",
+  "deviceNameInvalid": "Enter 1–40 characters",
+  "connect": "Connect",
+  "scanQr": "Scan QR Code",
+  "qrInvalid": "This QR code is not an Obscura pairing code.",
+  "noHubYet": "No hub yet?",
+  "noHubYetBody": "Step-by-step setup: server, camera, remote access, cloud.",
+  "insecureTitle": "Unencrypted connection",
+  "insecureBody": "This is a public address over plain http: your access token would travel unencrypted. Use Tailscale or https instead.",
+  "connectAnyway": "Connect Anyway",
+  "pairInvalidCode": "Invalid or expired code. Get a new one: docker compose exec hub python -m obscura pair",
+  "pairTooMany": "Too many attempts. Wait 10 minutes and try again.",
+  "hubUnreachable": "Hub unreachable",
+  "hubUnreachableHint": "Check that the hub is running and that your phone is on the same network or on Tailscale.",
+  "retry": "Retry",
+  "error": "Error",
+  "loading": "Loading…",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "save": "Save",
+  "saved": "Saved",
+  "saveChanges": "Save Changes",
+  "discard": "Discard",
+  "close": "Close",
+  "copy": "Copy",
+  "copied": "Copied",
+  "optional": "Optional",
+  "generate": "Generate",
+  "rename": "Rename",
+  "unsavedTitle": "Discard changes?",
+  "unsavedBody": "You have unsaved changes.",
+  "fieldRequired": "Required",
+  "yesterday": "Yesterday",
+  "tabHome": "Home",
+  "tabCameras": "Cameras",
+  "tabEvents": "Events",
+  "tabSettings": "Settings",
+  "tabNotifications": "Notifications",
+  "goodMorning": "Good morning",
+  "goodAfternoon": "Good afternoon",
+  "goodEvening": "Good evening",
+  "goodNight": "Good night",
+  "allSecure": "All Systems Secure",
+  "attentionNeeded": "Attention Needed",
+  "noCamerasYet": "No cameras yet",
+  "noCamerasBody": "Add your first camera: Tapo, Hikvision, Dahua, Reolink or any RTSP camera.",
+  "addFirstCamera": "Add your first camera",
+  "statTotal": "Total cameras",
+  "statOnline": "Online",
+  "statOffline": "Offline",
+  "statAlerts24h": "Alerts (24h)",
+  "statPeople24h": "People (24h)",
+  "personModelMissing": "Person detection is unavailable on the hub (model not loaded). Motion detection still works.",
+  "liveOverview": "Live overview",
+  "allCameras": "All Cameras",
+  "recentAlerts": "Recent alerts",
+  "seeAll": "See All",
+  "noEventsYet": "No events yet",
+  "noEventsBody": "Motion and people inside your zones will appear here.",
+  "online": "Online",
+  "offline": "Offline",
+  "live": "Live",
+  "connecting": "Connecting…",
+  "uploaded": "Copied to cloud",
+  "notUploaded": "Not copied",
+  "kindPerson": "Person detected",
+  "kindMotion": "Motion detected",
+  "kindManual": "Manual recording",
+  "camerasSubtitle": "Manage and monitor your devices",
+  "addCamera": "Add Camera",
+  "filterAllPlain": "All",
+  "privacyOn": "Privacy mode",
+  "privacyMode": "Privacy Mode",
+  "privacyEnable": "Turn On Privacy Mode",
+  "privacyDisable": "Resume Camera",
+  "privacyBody": "The hub stops live view, detection and recording for this camera until you resume it.",
+  "deleteCameraBody": "Its settings and zones will be removed. Recorded clips stay until retention deletes them.",
+  "moreActions": "More actions",
+  "triggers": "Triggers",
+  "triggerZones": "Trigger Zones",
+  "connectionSettings": "Login, password, IP",
+  "findOnNetwork": "Find cameras on the network",
+  "scan": "Scan",
+  "nothingFound": "Nothing found. Enter the IP manually — some cameras don't announce themselves.",
+  "alreadyAdded": "Already added",
+  "cameraBrand": "Brand",
+  "tapoHint": "Tapo needs a “camera account” for RTSP. Tap for the 1-minute guide.",
+  "cameraName": "Name",
+  "cameraNameHint": "Front Door…",
+  "cameraIp": "Camera IP",
+  "hostInvalid": "Enter an IP or host name",
+  "port": "Port",
+  "portInvalid": "1–65535",
+  "cameraUser": "Camera account user",
+  "cameraPassword": "Camera account password",
+  "passwordKeep": "Leave empty to keep the current one",
+  "showPassword": "Show password",
+  "hidePassword": "Hide password",
+  "advanced": "Advanced",
+  "advancedHint": "Custom RTSP stream paths",
+  "mainStreamPath": "Main stream path (recording)",
+  "subStreamPath": "Sub stream path (analysis)",
+  "subStreamHint": "Low resolution; empty = use main stream",
+  "pathInvalid": "Must start with / and contain no spaces",
+  "unmute": "Sound",
+  "mute": "Mute",
+  "capture": "Capture",
+  "record": "Record",
+  "snapshotSaved": "Snapshot saved",
+  "recordingStarted": "Recording 30 seconds…",
+  "stopRecording": "Stop",
+  "quickActions": "Quick actions",
+  "timeline": "Timeline",
+  "fullscreen": "Full screen",
+  "notificationsTriggers": "Notifications & Triggers",
+  "schedule": "Schedule",
+  "motionDetection": "Motion Detection",
+  "motionDetectionHint": "Any movement inside motion zones",
+  "personDetection": "Person Detection",
+  "personDetectionHint": "AI detects people inside person zones",
+  "alertSensitivity": "Alert Sensitivity",
+  "sensLow": "Low",
+  "sensMedium": "Medium",
+  "sensHigh": "High",
+  "sensitivityHint": "Higher catches smaller movements but may react to rain, insects or light changes.",
+  "zonesNone": "No zones: the whole frame is watched",
+  "editZones": "Edit",
+  "notifyPerson": "People",
+  "notifyPersonHint": "Loud alarm sound",
+  "notifyMotion": "Motion",
+  "notifyMotionHint": "Soft chime",
+  "soundPreview": "Sound check",
+  "soundPreviewHint": "Each alert type has its own sound so you know what happened without looking.",
+  "soundTest": "Sound test",
+  "alwaysOn": "Always On",
+  "alwaysOnHint": "Triggers work 24/7",
+  "onSchedule": "On Schedule",
+  "onScheduleHint": "Only at chosen times, e.g. at night",
+  "from": "From",
+  "to": "to",
+  "dayMon": "Mon",
+  "dayTue": "Tue",
+  "dayWed": "Wed",
+  "dayThu": "Thu",
+  "dayFri": "Fri",
+  "daySat": "Sat",
+  "daySun": "Sun",
+  "zone": "Zone",
+  "zoneName": "Zone name",
+  "zonesHint": "Add a zone, then drag its corners over the area to watch. Choose whether it reacts to motion, people or both. Zones for people check where the feet are.",
+  "legendBoth": "Motion + people",
+  "legendMotion": "Motion only",
+  "legendPerson": "People only",
+  "addZone": "Add Zone",
+  "addPoints": "Add Points",
+  "doneAddingPoints": "Done",
+  "undoPoint": "Remove last point",
+  "deleteZoneBody": "The zone will stop triggering alerts.",
+  "zoneInactive": "Zone is off: pick motion and/or people.",
+  "deleteEventTitle": "Delete event?",
+  "deleteEventBody": "The clip and thumbnail are removed from the hub. Cloud copies stay.",
+  "clipProcessing": "Saving clip…",
+  "clipUnavailable": "Clip unavailable",
+  "type": "Type",
+  "camera": "Camera",
+  "time": "Time",
+  "duration": "Duration",
+  "zones": "Zones",
+  "cloudCopy": "Cloud copy",
+  "saveOrShare": "Save or Share Clip",
+  "hubSection": "Hub",
+  "appSection": "App",
+  "pushActive": "Push on",
+  "pushInactive": "Push off — alerts only while the app is open",
+  "storage": "Storage",
+  "storageSubtitle": "Retention and cloud copies",
+  "devices": "Paired Devices",
+  "devicesSubtitle": "Phones with access, pair another",
+  "appLock": "App Lock",
+  "appLockHint": "Fingerprint, face or device PIN",
+  "lockUnsupported": "Set up a screen lock on this phone first.",
+  "guides": "Setup Guides",
+  "guidesSubtitle": "Server, cameras, remote access, cloud",
+  "about": "About & Licenses",
+  "aboutSubtitle": "Open source, MIT License",
+  "disconnect": "Disconnect From Hub",
+  "disconnectTitle": "Disconnect?",
+  "disconnectBody": "This phone forgets the hub. You’ll need a new pairing code to connect again.",
+  "deviceRevoked": "This phone was removed from the hub.",
+  "locked": "Obscura is locked",
+  "unlock": "Unlock",
+  "unlockReason": "Unlock Obscura",
+  "pairAnother": "Pair Another Phone",
+  "pairAnotherHint": "Scan with Obscura on the other phone (Connect → Scan QR Code).",
+  "qrCode": "Pairing QR code",
+  "codeExpires": "Single use, valid for 10 minutes",
+  "thisDevice": "this phone",
+  "revoke": "Revoke",
+  "revokeBody": "That phone loses access immediately.",
+  "devicesHint": "Lost a phone? Revoke it here from another paired phone.",
+  "onHub": "On the hub",
+  "keepDays": "Keep days",
+  "maxGb": "Max GB",
+  "retentionHint": "Oldest clips are deleted when either limit is reached.",
+  "retentionInvalid": "Days: 1–365, size: at least 0.5 GB",
+  "howTo": "How To",
+  "cloudEnabled": "Copy clips to the cloud",
+  "cloudEnabledHint": "Every clip is uploaded right after recording",
+  "rcloneCustom": "rclone",
+  "s3Provider": "Provider",
+  "s3Endpoint": "Endpoint",
+  "s3Region": "Region",
+  "s3AccessKey": "Access key ID",
+  "s3SecretKey": "Secret access key",
+  "webdavUrl": "WebDAV URL",
+  "webdavVendor": "Server type",
+  "webdavUser": "User",
+  "webdavPassword": "Password (app password)",
+  "secretWriteOnly": "Stored on the hub only; never shown again",
+  "rcloneRemote": "rclone remote name",
+  "rcloneRemoteHint": "Created on the hub with: docker compose exec -it hub rclone --config /data/rclone.conf config",
+  "cloudFolder": "Folder (for S3: bucket/folder)",
+  "testConnection": "Test Connection",
+  "storageTestOk": "Connection works",
+  "storageTestFailed": "Connection failed",
+  "pushTitle": "Push notifications",
+  "pushActiveHint": "Alerts arrive even when the app is closed",
+  "pushOffHint": "Needs the ntfy app as a push distributor",
+  "pushError": "Registration failed — open ntfy and try again",
+  "pushExplain": "Uses UnifiedPush (no Google services). Alert contents are end-to-end encrypted between the hub and this phone.",
+  "noDistributorTitle": "Install ntfy first",
+  "noDistributorBody": "Background alerts need a UnifiedPush distributor. Install the free ntfy app from Google Play or F-Droid, open it once, then turn push on again.",
+  "openGuide": "Open Guide",
+  "ntfyTitle": "ntfy topic (iPhone)",
+  "ntfyExplain": "For iPhone or as a backup: the hub also posts alerts to an ntfy topic you subscribe to in the ntfy app. Camera name and event type are sent in plain text.",
+  "ntfyEnable": "Send alerts to an ntfy topic",
+  "ntfyServer": "ntfy server",
+  "ntfyTopic": "Topic",
+  "ntfyTopicHint": "Anyone who knows the topic can read it — keep it long and random.",
+  "ntfyToken": "Access token",
+  "voiceAndSiren": "Voice & siren",
+  "holdToTalk": "Hold to talk",
+  "talking": "Speak now… release to send",
+  "talkSending": "Sending to the camera…",
+  "talkSent": "Played through the camera speaker",
+  "talkTooShort": "Keep holding the button while you speak",
+  "micDenied": "No microphone access. Allow it in the phone settings.",
+  "siren": "Siren",
+  "sirenStop": "Stop Siren",
+  "sirenConfirmTitle": "Turn on the siren?",
+  "sirenConfirmBody": "The camera will sound a loud alarm. It switches off by itself after the set time.",
+  "sirenTurnOn": "Turn On",
+  "sirenOff": "Siren off",
+  "talkSetupTitle": "Talk and siren are not set up",
+  "talkSetupTapo": "Enter your TP-Link account password in the camera connection settings.",
+  "talkSetupOther": "Turn on “Camera has a speaker” in the camera connection settings.",
+  "setUp": "Set Up",
+  "cloudPassword": "TP-Link account password",
+  "cloudPasswordHint": "For talk and siren: the password you sign in to the Tapo app with. No login needed — the camera always uses “admin”. The hub keeps only the password's hash.",
+  "cloudPasswordRemove": "Remove the account password",
+  "twoWay": "Camera has a speaker",
+  "twoWayHint": "Enables talk and a siren through the speaker (RTSP/ONVIF two-way audio).",
+  "controlOk": "TP-Link account password accepted",
+  "sirenOnPerson": "Siren when a person is detected",
+  "sirenOnPersonHint": "Scares off intruders. Uses the camera's own alarm (Tapo) or its speaker.",
+  "sirenDuration": "Siren duration",
+  "sirenUnavailable": "Needs the TP-Link account password (Tapo) or “Camera has a speaker” in the connection settings.",
+  "controlFailed": "Talk and siren unavailable: {message}",
+  "@controlFailed": {
+    "placeholders": {
+      "message": {
+        "type": "String"
+      }
+    }
+  },
+  "sirenOn": "Siren on for {seconds} s",
+  "@sirenOn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "camerasOnline": "{online} of {total} cameras online",
+  "@camerasOnline": {
+    "placeholders": {
+      "online": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "deleteCameraTitle": "Delete {name}?",
+  "@deleteCameraTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteZoneTitle": "Delete {name}?",
+  "@deleteZoneTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "revokeTitle": "Revoke {name}?",
+  "@revokeTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "diskFree": "{size} free",
+  "@diskFree": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "storedClips": "clips {size}",
+  "@storedClips": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "lastSeen": "Last seen {time}",
+  "@lastSeen": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "filterAll": "All ({count})",
+  "@filterAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "filterOnline": "Online ({count})",
+  "@filterOnline": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "filterOffline": "Offline ({count})",
+  "@filterOffline": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "seconds": "{count, plural, =1{1 second} other{{count} seconds}}",
+  "@seconds": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "zonesCount": "{count, plural, =1{1 zone} other{{count} zones}}",
+  "@zonesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "storageUsage": "{count, plural, =1{1 clip} other{{count} clips}}, {size}",
+  "@storageUsage": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "change": "Change",
+  "deleteAllEvents": "Delete all events",
+  "deleteAllEventsBody": "Every clip and thumbnail from all cameras is removed from the hub. This can't be undone.",
+  "deleteCameraEventsBody": "Every clip and thumbnail from this camera is removed from the hub. This can't be undone.",
+  "showOverlay": "Show zones and motion",
+  "hideOverlay": "Hide zones and motion",
+  "download": "Download",
+  "savedToGallery": "Saved to gallery (Obscura album)",
+  "recordLow": "Compact recording (720p)",
+  "recordLowHint": "Clips are about 3x smaller and the hub pulls one stream from the camera instead of two. Live view stays full quality.",
+  "remoteHubManual": "The hub runs on a remote server, so it can't search your home network. Enter the address the server reaches the camera at (e.g. your router's tunnel address)."
+}

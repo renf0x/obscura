@@ -1,0 +1,36 @@
+# Obscura hub. Start with:  docker compose up -d
+# First pairing code:       docker compose logs hub | grep -i pairing
+# New pairing code:         docker compose exec hub python -m obscura pair
+services:
+  go2rtc:
+    image: alexxit/go2rtc:1.9.14
+    network_mode: host        # low-latency RTSP from cameras on the LAN
+    restart: unless-stopped
+    # Inline config, no config file: cameras registered by the hub (with their passwords) stay in
+    # memory only. Everything listens on localhost; the phone never talks to go2rtc directly.
+    # allow_paths blocks /api/exec, /api/config and the web UI.
+    command:
+      - go2rtc
+      - -config
+      - >-
+        {"api": {"listen": "127.0.0.1:1984",
+                 "allow_paths": ["/api/streams", "/api/frame.jpeg", "/api/stream.mp4"]},
+         "rtsp": {"listen": "127.0.0.1:8554"},
+         "webrtc": {"listen": ""},
+         "srtp": {"listen": ""},
+         "log": {"level": "warn"}}
+
+  hub:
+    image: ghcr.io/renf0x/obscura-hub:latest
+    build: ../hub             # or build locally: docker compose up -d --build
+    network_mode: host        # camera discovery (ONVIF multicast) and localhost access to go2rtc
+    restart: unless-stopped
+    depends_on: [go2rtc]
+    environment:
+      OBSCURA_PORT: "7878"
+      TZ: "Europe/Moscow"     # your time zone (for schedules and clip dates)
+    volumes:
+      - ./data:/data          # database, clips, rclone.conf
+    tmpfs:
+      # 90-second rolling pre-record buffer in RAM: spares SD cards on a Raspberry Pi.
+      - /data/buffer:size=512m,uid=1000,gid=1000,mode=0700

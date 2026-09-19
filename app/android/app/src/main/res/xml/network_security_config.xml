@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The hub usually lives on the LAN or on Tailscale (WireGuard-encrypted) and speaks plain http,
+  so cleartext must be allowed. The app itself warns before pairing over http with a public address.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>
