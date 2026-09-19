@@ -129,6 +129,12 @@ the same way, but specific models haven't been verified.
    connection settings. The hub stores only its hash, never the password. On Tapo the siren is the camera's
    own alarm, sound and light.
 
+> [!WARNING]
+> **Known issue.** Tapo firmware released since July 2026 rejects the local control login with error `-40211`,
+> so talk and siren don't work. Video and detection are not affected. The problem is in the firmware and hits
+> other third-party clients too ([pytapo#17](https://github.com/JurajNyiri/pytapo/issues/17)). Seen on a
+> Tapo C110.
+
 **Other cameras**
 
 Any camera that streams over RTSP or ONVIF should work. For Hikvision, Dahua/Imou and Reolink the app fills
