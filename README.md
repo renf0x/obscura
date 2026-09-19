@@ -130,10 +130,12 @@ the same way, but specific models haven't been verified.
    own alarm, sound and light.
 
 > [!WARNING]
-> **Known issue.** Tapo firmware released since July 2026 rejects the local control login with error `-40211`,
-> so talk and siren don't work. Video and detection are not affected. The problem is in the firmware and hits
-> other third-party clients too ([pytapo#17](https://github.com/JurajNyiri/pytapo/issues/17)). Seen on a
-> Tapo C110.
+> **Known issue.** Newer Tapo firmware changed the login for local camera control, and the hub doesn't support
+> the new login yet: the camera answers with error `-40211`, so talk and siren don't work. Video and detection
+> are not affected. Other third-party clients hit the same error
+> ([pytapo#177](https://github.com/JurajNyiri/pytapo/issues/177),
+> [HomeAssistant-Tapo-Control#1372](https://github.com/JurajNyiri/HomeAssistant-Tapo-Control/issues/1372)).
+> Seen on a Tapo C110.
 
 **Other cameras**
 
