@@ -112,7 +112,7 @@ the address looks like `HUB_IP:7878`), or scan the QR code from option B.
 ### Cameras
 
 Obscura was tested with TP-Link Tapo cameras, so they get a step-by-step guide below. Other cameras connect
-the same way, but we haven't verified specific models.
+the same way, but specific models haven't been verified.
 
 **TP-Link Tapo**
 
