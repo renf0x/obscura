@@ -31,7 +31,7 @@ something moves in a zone or a person walks in, the hub records a short clip, se
 and stores the footage where you tell it to: on the hub, in S3, on a WebDAV share, or in any cloud rclone
 supports.
 
-## Equipment
+## Features
 
 - **Live view** from anywhere. The phone connects to the hub, never to the camera.
 - **Zones on the image.** Draw the areas you care about and pick what each one reacts to: motion, people,
