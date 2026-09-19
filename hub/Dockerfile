@@ -9,11 +9,12 @@ RUN apt-get update \
 ARG RCLONE_VERSION=v1.75.1
 RUN set -eux; arch="$(dpkg --print-architecture)"; \
     base="https://github.com/rclone/rclone/releases/download/${RCLONE_VERSION}"; \
-    curl -fsSLo /tmp/rclone.zip "${base}/rclone-${RCLONE_VERSION}-linux-${arch}.zip"; \
+    zip="rclone-${RCLONE_VERSION}-linux-${arch}.zip"; \
+    curl -fsSLo "/tmp/${zip}" "${base}/${zip}"; \
     curl -fsSLo /tmp/SHA256SUMS "${base}/SHA256SUMS"; \
-    (cd /tmp && grep " rclone-${RCLONE_VERSION}-linux-${arch}.zip\$" SHA256SUMS | sha256sum -c -); \
-    unzip -j /tmp/rclone.zip "*/rclone" -d /usr/local/bin; chmod 755 /usr/local/bin/rclone; \
-    rm /tmp/rclone.zip /tmp/SHA256SUMS
+    (cd /tmp && grep " ${zip}\$" SHA256SUMS | sha256sum -c -); \
+    unzip -j "/tmp/${zip}" "*/rclone" -d /usr/local/bin; chmod 755 /usr/local/bin/rclone; \
+    rm "/tmp/${zip}" /tmp/SHA256SUMS
 
 # YOLOX-nano person detector (Apache-2.0), pinned by hash.
 ARG MODEL_URL=https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_nano.onnx
