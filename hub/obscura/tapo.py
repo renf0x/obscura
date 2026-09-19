@@ -182,6 +182,8 @@ def _login_error(res: dict) -> str:
     if data.get("code") == -40411 or res.get("error_code") == -40411:
         return "wrong TP-Link account password"
     if res.get("error_code") == -40211:
-        # Firmware from mid-2026 changed the local login handshake; not a password problem.
-        return "camera firmware blocks local control (error -40211); video still works"
+        # MISSING_NECESSARY_PARAMS. Some 2026 firmware answers the first login step with it even though
+        # cnonce is sent; cause unknown (pytapo#211). A longer account password helped in python-kasa#1712.
+        return ("camera rejected local control login (error -40211); video still works. Try Third-Party "
+                "Compatibility on, two-step verification off, or a longer TP-Link password")
     return f"camera login failed (error {res.get('error_code')})"

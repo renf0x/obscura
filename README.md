@@ -130,12 +130,13 @@ the same way, but specific models haven't been verified.
    own alarm, sound and light.
 
 > [!WARNING]
-> **Known issue.** Newer Tapo firmware changed the login for local camera control, and the hub doesn't support
-> the new login yet: the camera answers with error `-40211`, so talk and siren don't work. Video and detection
-> are not affected. Other third-party clients hit the same error
-> ([pytapo#177](https://github.com/JurajNyiri/pytapo/issues/177),
-> [HomeAssistant-Tapo-Control#1372](https://github.com/JurajNyiri/HomeAssistant-Tapo-Control/issues/1372)).
-> Seen on a Tapo C110.
+> **Known issue.** Some Tapo cameras on 2026 firmware reject the local control login with error `-40211`, and
+> then talk and siren don't work. Video and detection are not affected. The cause isn't known yet: pytapo and
+> both Tapo integrations for Home Assistant hit the same error
+> ([pytapo#211](https://github.com/JurajNyiri/pytapo/issues/211),
+> [python-kasa#1712](https://github.com/python-kasa/python-kasa/issues/1712)). Things to try: turn on
+> "Third-Party Compatibility", turn off two-step verification on the TP-Link account, switch the account to a
+> longer password (in one report a 16-character password fixed it). Seen on a Tapo C110.
 
 **Other cameras**
 
