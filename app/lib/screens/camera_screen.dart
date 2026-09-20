@@ -56,8 +56,6 @@ class _CameraScreenState extends State<CameraScreen> with WidgetsBindingObserver
       // Live view: no buffering, show the newest frame as soon as it arrives.
       native.setProperty('cache', 'no');
       native.setProperty('demuxer-max-bytes', '2MiB');
-      // Muted by default: don't decode audio at all until the user turns sound on.
-      native.setProperty('aid', 'no');
     }
     eventsVersion.addListener(_loadEvents);
     WidgetsBinding.instance.addObserver(this);
@@ -109,11 +107,10 @@ class _CameraScreenState extends State<CameraScreen> with WidgetsBindingObserver
     if (_camera?.enabled == true) _play();
   }
 
-  void _setAudio(bool on) {
-    _player.setVolume(on ? 100 : 0);
-    final native = _player.platform;
-    if (native is NativePlayer) native.setProperty('aid', on ? 'auto' : 'no');
-  }
+  // Sound is muted by the volume alone. The stream is opened without an audio track unless the user
+  // asked for sound, so there is nothing to decode anyway, and mpv's 'aid' property is left alone:
+  // setting it to 'no' kept the player silent even after the track was back.
+  void _setAudio(bool on) => _player.setVolume(on ? 100 : 0);
 
   void _scheduleReconnect() {
     _retry?.cancel();
