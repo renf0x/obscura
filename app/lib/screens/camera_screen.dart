@@ -39,7 +39,6 @@ class _CameraScreenState extends State<CameraScreen> with WidgetsBindingObserver
   bool _hd = false;
   bool _recording = false;
   Timer? _recordEnd;
-  bool _streamAudio = false; // the open stream carries sound
   Timer? _retry;
   StreamSubscription<bool>? _ended;
   // Another screen is on top: the stream is stopped so the phone doesn't decode video nobody sees.
@@ -107,9 +106,9 @@ class _CameraScreenState extends State<CameraScreen> with WidgetsBindingObserver
     if (_camera?.enabled == true) _play();
   }
 
-  // Sound is muted by the volume alone. The stream is opened without an audio track unless the user
-  // asked for sound, so there is nothing to decode anyway, and mpv's 'aid' property is left alone:
-  // setting it to 'no' kept the player silent even after the track was back.
+  // Sound is muted by the volume alone. The stream always carries the audio track, so the button never
+  // has to reopen it -- reopening blanked the picture for about a second. mpv's 'aid' property is left
+  // alone: setting it to 'no' kept the player silent even after the track was back.
   void _setAudio(bool on) => _player.setVolume(on ? 100 : 0);
 
   void _scheduleReconnect() {
@@ -157,9 +156,8 @@ class _CameraScreenState extends State<CameraScreen> with WidgetsBindingObserver
   void _play() {
     _stopped = false;
     final hub = context.hub;
-    _streamAudio = !_muted;
-    _setAudio(_streamAudio);
-    _player.open(Media(hub.liveUrl(widget.cameraId, hd: _hd, audio: _streamAudio).toString(), httpHeaders: hub.authHeaders));
+    _setAudio(!_muted);
+    _player.open(Media(hub.liveUrl(widget.cameraId, hd: _hd, audio: true).toString(), httpHeaders: hub.authHeaders));
   }
 
   Future<void> _capture() async {
@@ -288,12 +286,7 @@ class _CameraScreenState extends State<CameraScreen> with WidgetsBindingObserver
                         onTap: cam.enabled
                             ? () {
                                 setState(() => _muted = !_muted);
-                                // The stream is opened without sound to save data; reopen it once sound is wanted.
-                                if (!_muted && !_streamAudio) {
-                                  _play();
-                                } else {
-                                  _setAudio(!_muted);
-                                }
+                                _setAudio(!_muted);
                               }
                             : null,
                       ),
