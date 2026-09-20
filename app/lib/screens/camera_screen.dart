@@ -44,6 +44,7 @@ class _CameraScreenState extends State<CameraScreen> with WidgetsBindingObserver
   StreamSubscription<bool>? _ended;
   // Another screen is on top: the stream is stopped so the phone doesn't decode video nobody sees.
   bool _covered = false;
+  bool _stopped = false; // the player was stopped by this screen, so resuming has to reopen it
   bool _fullscreen = false;
 
   @override
@@ -72,8 +73,12 @@ class _CameraScreenState extends State<CameraScreen> with WidgetsBindingObserver
     // In the background Android drops the connection and the picture freezes; stop and reopen instead.
     if (state == AppLifecycleState.paused) {
       _retry?.cancel();
+      _stopped = true;
       _player.stop();
-    } else if (state == AppLifecycleState.resumed && !_covered && _camera?.enabled == true) {
+    } else if (state == AppLifecycleState.resumed && _stopped && !_covered && _camera?.enabled == true) {
+      // Only after a real stop. Pulling down the notification shade or dismissing a notification
+      // leaves the stream running, and reopening it there blanked the picture for a second.
+      _stopped = false;
       _play();
     }
   }
@@ -90,6 +95,7 @@ class _CameraScreenState extends State<CameraScreen> with WidgetsBindingObserver
     if (_fullscreen) return; // fullscreen shows this same stream
     _covered = true;
     _retry?.cancel();
+    _stopped = true;
     _player.stop();
   }
 
@@ -152,6 +158,7 @@ class _CameraScreenState extends State<CameraScreen> with WidgetsBindingObserver
   }
 
   void _play() {
+    _stopped = false;
     final hub = context.hub;
     _streamAudio = !_muted;
     _setAudio(_streamAudio);

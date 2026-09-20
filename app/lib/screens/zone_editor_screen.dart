@@ -214,11 +214,12 @@ class _ZoneEditorScreenState extends State<ZoneEditorScreen> {
                               _VertexDragRecognizer:
                                   GestureRecognizerFactoryWithHandlers<_VertexDragRecognizer>(
                                 () => _VertexDragRecognizer(),
-                                (r) => r
-                                  ..vertexAt = (p) => _vertexAt(p, size)
-                                  ..onStart = (i) => _dragVertex = i
-                                  ..onUpdate = (p) => _onPanUpdate(p, size)
-                                  ..onEnd = () => _dragVertex = null,
+                                (r) {
+                                  r.vertexAt = (p) => _vertexAt(p, size);
+                                  r.onStart = (i) => _dragVertex = i;
+                                  r.onUpdate = (p) => _onPanUpdate(p, size);
+                                  r.onEnd = () => _dragVertex = null;
+                                },
                               ),
                             },
                             child: GestureDetector(
