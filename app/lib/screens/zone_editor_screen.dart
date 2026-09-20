@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:typed_data';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../api/models.dart';
@@ -144,18 +145,20 @@ class _ZoneEditorScreenState extends State<ZoneEditorScreen> {
     return inside;
   }
 
-  void _onPanStart(Offset pos, Size size) {
-    if (_selected == null) return;
+  /// Index of the vertex under the finger, or null when the touch lands elsewhere.
+  int? _vertexAt(Offset pos, Size size) {
+    if (_selected == null) return null;
     final pts = _zones[_selected!].points;
-    var best = 28.0; // px: generous touch target around each vertex
-    _dragVertex = null;
+    var best = 32.0; // px: generous touch target around each vertex
+    int? found;
     for (var i = 0; i < pts.length; i++) {
       final d = (Offset(pts[i][0] * size.width, pts[i][1] * size.height) - pos).distance;
       if (d < best) {
         best = d;
-        _dragVertex = i;
+        found = i;
       }
     }
+    return found;
   }
 
   void _onPanUpdate(Offset pos, Size size) {
@@ -203,18 +206,31 @@ class _ZoneEditorScreenState extends State<ZoneEditorScreen> {
                         aspectRatio: _aspect,
                         child: LayoutBuilder(builder: (context, box) {
                           final size = box.biggest;
-                          return GestureDetector(
-                            onTapUp: (d) => _onTap(d.localPosition, size),
-                            onPanStart: (d) => _onPanStart(d.localPosition, size),
-                            onPanUpdate: (d) => _onPanUpdate(d.localPosition, size),
-                            onPanEnd: (_) => _dragVertex = null,
-                            child: Stack(fit: StackFit.expand, children: [
-                              if (_snapshot != null)
-                                Image.memory(_snapshot!, fit: BoxFit.fill, gaplessPlayback: true)
-                              else
-                                const ColoredBox(color: Palette.surfaceHigh),
-                              CustomPaint(painter: _ZonePainter(_zones, _selected)),
-                            ]),
+                          return RawGestureDetector(
+                            // A plain pan loses the gesture to the surrounding list: dragging a point
+                            // scrolled the page instead. This recognizer claims the touch as soon as a
+                            // finger lands on a point, and leaves every other touch to the list.
+                            gestures: {
+                              _VertexDragRecognizer:
+                                  GestureRecognizerFactoryWithHandlers<_VertexDragRecognizer>(
+                                () => _VertexDragRecognizer(),
+                                (r) => r
+                                  ..vertexAt = (p) => _vertexAt(p, size)
+                                  ..onStart = (i) => _dragVertex = i
+                                  ..onUpdate = (p) => _onPanUpdate(p, size)
+                                  ..onEnd = () => _dragVertex = null,
+                              ),
+                            },
+                            child: GestureDetector(
+                              onTapUp: (d) => _onTap(d.localPosition, size),
+                              child: Stack(fit: StackFit.expand, children: [
+                                if (_snapshot != null)
+                                  Image.memory(_snapshot!, fit: BoxFit.fill, gaplessPlayback: true)
+                                else
+                                  const ColoredBox(color: Palette.surfaceHigh),
+                                CustomPaint(painter: _ZonePainter(_zones, _selected)),
+                              ]),
+                            ),
                           );
                         }),
                       ),
@@ -373,4 +389,46 @@ class _ZonePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _ZonePainter old) => true;
+}
+
+/// Drags a zone point out of a scrolling list. A [PanGestureRecognizer] needs more travel than the
+/// list's vertical drag, so the list used to win and the page scrolled instead of the point moving.
+/// This one takes the touch the moment it lands on a point, and ignores every other touch.
+class _VertexDragRecognizer extends OneSequenceGestureRecognizer {
+  late int? Function(Offset local) vertexAt;
+  late void Function(int index) onStart;
+  late void Function(Offset local) onUpdate;
+  late VoidCallback onEnd;
+
+  int? _pointer;
+
+  @override
+  void addAllowedPointer(PointerDownEvent event) {
+    if (_pointer != null) return; // already dragging a point with another finger
+    final index = vertexAt(event.localPosition);
+    if (index == null) return; // not on a point: let the list scroll
+    _pointer = event.pointer;
+    startTrackingPointer(event.pointer, event.transform);
+    resolve(GestureDisposition.accepted);
+    onStart(index);
+  }
+
+  @override
+  void handleEvent(PointerEvent event) {
+    if (event.pointer != _pointer) return;
+    if (event is PointerMoveEvent) {
+      onUpdate(event.localPosition);
+    } else if (event is PointerUpEvent || event is PointerCancelEvent) {
+      stopTrackingPointer(event.pointer);
+    }
+  }
+
+  @override
+  void didStopTrackingLastPointer(int pointer) {
+    _pointer = null;
+    onEnd();
+  }
+
+  @override
+  String get debugDescription => 'zone vertex drag';
 }

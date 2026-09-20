@@ -48,12 +48,15 @@ class Go2rtc:
 
     def mp4_request(self, cam_id: int, sub: bool, audio: bool = False) -> httpx.Request:
         name = stream_names(cam_id)[1 if sub else 0]
-        params = {"src": name}
+        src = name
         if audio:
-            # mp4=flac keeps G.711 (PCMA/PCMU) camera audio, which plain MP4 can't carry. Only on request:
-            # go2rtc 1.9.14's FLAC encoder can crash the whole process when a viewer disconnects.
-            params["mp4"] = "flac"
-        return self.client.build_request("GET", "/api/stream.mp4", params=params)
+            # Cameras send G.711 (PCMA/PCMU), which plain MP4 cannot carry. go2rtc can repack it as
+            # FLAC, but Android's player stays silent on FLAC-in-MP4 and the FLAC encoder in go2rtc
+            # 1.9.14 can crash the process when a viewer disconnects. Transcode to AAC instead, the
+            # codec the clips already use; the video track is copied. go2rtc starts this ffmpeg
+            # source when the first viewer asks for sound and stops it when the last one leaves.
+            src = f"ffmpeg:{name}#video=copy#audio=aac"
+        return self.client.build_request("GET", "/api/stream.mp4", params={"src": src})
 
     async def play(self, cam_id: int, src: str) -> None:
         """Play audio into the camera's speaker (go2rtc "stream to camera")."""
